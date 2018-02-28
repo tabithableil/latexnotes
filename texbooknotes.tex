@@ -1,0 +1,141 @@
+%----begin preamble----%
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\lstset{
+   breaklines=true,
+   basicstyle=\small\ttfamily,
+   columns=flexible}
+\pagenumbering{gobble}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+
+%----end preamble----%
+
+
+\begin{document}
+\centerline{{\large Notes from Knuth's \TeX book}} \vskip .2cm
+\centerline{\it "I can't go to a restaurant and order food because I keep looking at the fonts on the menu. - DK}
+\vskip .5cm
+1.1 - After you have mastered the material in this book, what will you be: A \TeX pert, or a \TeX nician? \\ \\
+I will be the very best \TeX nician, like no one ever was. \\ 
+
+2.1 - Explain how to type the following sentence to \TeX : Alice said, "I always use an en-dash instead of a hyphen when specifying page numbers like '480--491' in a bibliography." 
+\begin{lstlisting}
+Alice said, "I always use an en-dash instead of a hyphen when specifying page numbers like '480--491' in a bibliography."
+\end{lstlisting}
+
+2.2 - What do you think happens when you type four hyphens in a row? \\ \\
+My guess is one em-dash and a hyphen. Let's see: ---- \\
+
+2.3 - Think of an English word that contains two ligatures. \\ \\
+A {\it ligature} is a combination of letters that are treated as one unit so the word looks better. Two examples would be kerfuffle and filament. \\ 
+
+2.4 - Ok, now you know how to produce \thinspace\rq\rq\thinspace\rq\ and \rq\thinspace\rq\rq; how do you get \lq\lq\thinspace\lq\ and \lq\thinspace\lq\lq\thinspace? 
+\begin{lstlisting}
+\lq\lq\thinspace\lq\ and \lq\thinspace\lq\lq
+\end{lstlisting}
+
+2.5 - Why do you think the author introduced the control sequence \verb|\thinspace| to solve the adjacent-quotes problem, instead of recommending the tricker construction \verb|'$\,$''| (which also works)? \\ \\
+Utilizing math mode in this case would be unneccessary. \\
+
+3.1 - What are the control sequences in '\lstinline{\I'm \exercise3.1\\!}'? 
+\begin{lstlisting}
+\I, \exercise, and \\
+\end{lstlisting}
+
+3.2 - We've seen that the input \verb|P\'olya| yields 'P\'olya'. Can you guess how the words 'math\'ematique' and 'centim\`etre' should be specified?
+\begin{lstlisting}
+math\'ematique and centim\`etre}
+\end{lstlisting}
+
+3.3 - Which of the control sequences \verb|\_| and \verb|\(return)| is primitive? 
+
+\verb|\(return)| is primitive because \TeX\ treats this the same as control space.
+
+4.1 - Explain how to type the bibliographic reference 'Ulrich Dieter, {\sl Journal f\"ur die reine und angewandte Mathematik} {\bf 201} (1959), 37--79.' [Use grouping.] \\ 
+
+\lstinline{'Ulrich Dieter, {\sl Journal f\"ur die reine und angewandte Mathematik} {\bf 201} (1959), 37--79.'} \\
+
+4.2 - {\it Explain how to typeset a }roman {\it word in the midst of an italicized sentence.}
+
+\lstinline{Use grouping.} \\ \\
+
+4.4 - Why do you think the author chose the names '\verb|\tenpoint|' and '\verb|\tenrm|', etc., instead of '\verb|\10point|' and '\verb|10rm|'? \\
+
+You can't use numbers in control sequences. 
+\newpage
+4.5 - Suppose that you have typed a manuscript using slanted type for emphasis, but your editor suddenly tells you to change all the slanted to italic. What's an easy way to do this? 
+
+\begin{lstlisting}
+\renewcommand{\sl}{\it}
+\end{lstlisting} 
+
+Possibly not the best way to do this, but the simplest. Since \verb|\sl| is already defined, we just redefine it to italics with \verb|\renewcommand|. \\
+
+
+5.1 - Sometimes you run into a rare word like 'shelfful' that looks better as 'shelfful' without the 'ff' ligature. How can you fool \TeX\ into thinking that there aren't two consecutive f's in such a word?
+\begin{lstlisting}
+shelf{f}ul
+\end{lstlisting}
+
+5.2 - Explain how to get three blank spaces in a row without using '\verb|\_|'.
+\begin{lstlisting}
+{ { { }}}
+\end{lstlisting}
+
+5.3 - What do you think happens if you type the following: 
+\begin{lstlisting}
+\centerline{This information should be {centered}.}
+\centerline So should this.
+\end{lstlisting}
+
+The first sentence will be centered, but only the 'S' in the second will be centered.
+
+
+{\centerline{This information should be {centered}.}}
+{\centerline So should this.} \\
+
+5.4 - How about this one?
+\begin{lstlisting}
+\centerline{This information should be \it centered.}
+\end{lstlisting}
+
+Centered with 'centered' in italics.\\
+{\centerline{This information should be \it centered.}}
+
+
+5.5 - Define a control sequence \verb|\ital| so that a user could type 
+'\verb|\ital{text}|' 
+
+\begin{lstlisting}
+\newcommand{\ital}[1]{{\it #1}\/}
+\ital{nice nice nicf}  what \\
+{\it nice nice nicf} what
+\end{lstlisting}
+
+
+6.1 Exercise 6.1 - Statistics show that only 7.43 of 10 people who read this manual actually type the \verb|story.tex| file as recommended, but that those people learn \TeX best. So why don't you join them?  \\
+\hrule
+\vskip 1in
+\centerline{\bf A SHORT STORY}
+\vskip 6pt
+\centerline{\sl by A. U. Thor}
+\vskip .5cm
+Once upon a time, in a distant galaxy called \"O\"o\c c, there lived a computer named R.~J. Drofnats.
+
+Mr. ~Drofnats---or "R. J.," as he preferred to be called---was happiest when he was at work typesetting beautiful documents. 
+\vskip 1in
+\hrule
+\vskip .5cm
+Exercise 6.2 - Look closely at the output of Experiment 2, and compare it to \verb|story.tex|: If you followed the instructions carefully, you will notice a typographical error. What is it, and why did it sneak in? \\
+Typed the whole thing on one line so no error :) \\
+
+
+\end{document}
